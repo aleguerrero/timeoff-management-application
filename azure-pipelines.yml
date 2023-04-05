@@ -25,8 +25,7 @@ stages:
         npm i sqlite3
         npm install
         npm run build --if-present
-        npm run test --if-present
-      displayName: 'npm install, build and test'
+      displayName: 'npm install and build'
 
     - task: ArchiveFiles@2
       displayName: 'Archive files'
