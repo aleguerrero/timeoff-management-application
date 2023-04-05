@@ -17,11 +17,11 @@ stages:
 
     steps:
 
-    # - script: |
-    #     sudo apt update -y
-    #     sudo apt upgrade -y
-    #     sudo apt install sqlite3 -y
-    #   displayName: 'install sqlite3'
+    - script: |
+        sudo apt update -y
+        sudo apt upgrade -y
+        sudo apt install sqlite3 -y
+      displayName: 'install sqlite3'
 
     - task: NodeTool@0
       inputs:
