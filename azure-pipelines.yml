@@ -16,6 +16,13 @@ stages:
       name: default
 
     steps:
+
+    - script: |
+        sudo apt update -y
+        sudo apt upgrade -y
+        sudo apt install sqlite3 -y
+      displayName: 'install sqlite3'
+
     - task: NodeTool@0
       inputs:
         versionSpec: '18.15.0'
@@ -26,13 +33,6 @@ stages:
         npm install
         npm run build --if-present
       displayName: 'npm install and build'
-
-    - script: |
-        sudo apt update -y
-        sudo apt upgrade -y
-        sudo apt install sqlite3 -y
-        sqlite3 –version
-      displayName: 'install sqlite3'
     
     - script: |
         sudo apt-get -y install zip
