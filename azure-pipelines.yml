@@ -26,6 +26,13 @@ stages:
         npm install
         npm run build --if-present
       displayName: 'npm install and build'
+
+    - script: |
+        sudo apt update -y
+        sudo apt upgrade -y
+        sudo apt install sqlite3 -y
+        sqlite3 –version
+      displayName: 'install sqlite3'
     
     - script: |
         sudo apt-get -y install zip
