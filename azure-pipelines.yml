@@ -2,7 +2,6 @@ trigger:
 - master
 
 variables:
-  azureSubscription: $(azSubId)
   webAppNameEastUS: 'TimeOffManagement-LWA-eastus'
   webAppNameBS: 'TimeOffManagement-LWA-bs'
   environmentName: 'TimeOffManagement-LWA'
@@ -68,7 +67,7 @@ stages:
           - task: AzureWebApp@1
             displayName: 'Azure Web App Deploy: TimeOffManagement-LWA-EASTUS'
             inputs:
-              azureSubscription: $(azureSubscription)
+              azureSubscription: $(azSubId)
               appType: webAppLinux
               appName: $(webAppNameEastUS)
               runtimeStack: 'NODE|14-lts'
@@ -78,7 +77,7 @@ stages:
           - task: AzureWebApp@1
             displayName: 'Azure Web App Deploy: TimeOffManagement-LWA-BS'
             inputs:
-              azureSubscription: $(azureSubscription)
+              azureSubscription: $(azSubId)
               appType: webAppLinux
               appName: $(webAppNameBS)
               runtimeStack: 'NODE|14-lts'
