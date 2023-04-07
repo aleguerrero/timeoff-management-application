@@ -98,6 +98,7 @@ First: Create the infrastructure.
 5. Enter ```terraform apply -auto-approve```.
 6. Once done, run the following script to connect the policy to the Front Door service:
 ```bash
+# Change the <subscriptionid> for your Azure Subscription ID
 az afd security-policy create \
     --resource-group TimeOffManagement-RG-FD \
     --profile-name tom-frontdoor-profile \
