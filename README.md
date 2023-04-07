@@ -83,6 +83,12 @@ Create company account and use cloud based version.
 This is the architecture diagram of the application hosting, it was done using Azure.
 ![image](https://user-images.githubusercontent.com/27838418/230555481-7b5c6ea3-ad6b-460d-9ca9-cf6ce283a2ae.png)
 
+Prerequisites:
+- Have an Azure account.
+- Have an Azure DevOps project and organization.
+- Have Azure CLI in your machine.
+- Have Terraform locally installed and Azure configured, for more information on how to configure it, follow this [documentation](https://developer.hashicorp.com/terraform/tutorials/azure-get-started/azure-build#authenticate-using-the-azure-cli).
+
 Steps:
 First: Create the infrastructure.
 1. Inside the project, open a terminal.
@@ -110,7 +116,7 @@ Second: Build and deploy the project in Azure DevOps
     1. Name: azSubId
     2. Value: <your subscription id>
 7. Click on Ok, and then in Save.
-8. Copy/paste the following YAML code: https://github.com/aleguerrero/timeoff-management-application/blob/2a8897d61963d8bfb3d71a1ac850b03751f1e042/azure-pipelines.yml
+8. Copy/paste the following YAML code: [azure-pipelines.yml](https://github.com/aleguerrero/timeoff-management-application/blob/2a8897d61963d8bfb3d71a1ac850b03751f1e042/azure-pipelines.yml)
 9. Once done, select Save and run.
 
 
