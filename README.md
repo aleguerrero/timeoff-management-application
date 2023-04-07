@@ -115,7 +115,7 @@ Second: Build and deploy the project in Azure DevOps
 5. From there, you can select a Starter pipeline.
 6. Go to Variables -> New variable and in there set the following:
     1. Name: azSubId
-    2. Value: <your subscription id>
+    2. Value: your-subscription-id
 7. Click on Ok, and then in Save.
 8. Copy/paste the following YAML code: [azure-pipelines.yml](https://github.com/aleguerrero/timeoff-management-application/blob/2a8897d61963d8bfb3d71a1ac850b03751f1e042/azure-pipelines.yml)
 9. Once done, select Save and run.
