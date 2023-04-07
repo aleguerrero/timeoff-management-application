@@ -85,7 +85,7 @@ This is the architecture diagram of the application hosting, it was done using A
 
 Prerequisites:
 - Have an Azure account.
-- Have an Azure DevOps project and organization.
+- Have an Azure DevOps project and organization with Agent Pools configured.
 - Have Azure CLI in your machine.
 - Have Terraform locally installed and Azure configured, for more information on how to configure it, follow this [documentation](https://developer.hashicorp.com/terraform/tutorials/azure-get-started/azure-build#authenticate-using-the-azure-cli).
 
@@ -118,7 +118,12 @@ Second: Build and deploy the project in Azure DevOps
     2. Value: your-subscription-id
 7. Click on Ok, and then in Save.
 8. Copy/paste the following YAML code: [azure-pipelines.yml](https://github.com/aleguerrero/timeoff-management-application/blob/2a8897d61963d8bfb3d71a1ac850b03751f1e042/azure-pipelines.yml)
-9. Once done, select Save and run.
+    NOTE: If you need to change the agent pool name, do it on each pool->name in the YAML 
+    ```yaml
+    pool: 
+        name:
+    ```
+10. Once done, select Save and run.
 
 
 ### Self hosting
