@@ -78,6 +78,41 @@ Visit http://timeoff.management/
 
 Create company account and use cloud based version.
 
+### Using Terraform and Azure DevOps
+
+This is the architecture diagram of the application hosting, it was done using Azure.
+![image](https://user-images.githubusercontent.com/27838418/230555481-7b5c6ea3-ad6b-460d-9ca9-cf6ce283a2ae.png)
+
+Steps:
+First: Create the infrastructure.
+1. Inside the project, open a terminal.
+2. Go to the IaC folder by using ```bashcd IaC```.
+3. Enter terraform init.
+4. Enter terraform apply -auto-approve.
+5. Once done, run the following script to connect the policy to the Front Door service:
+```bash
+az afd security-policy create \
+--resource-group TimeOffManagement-RG-FD \
+--profile-name tom-frontdoor-profile \
+--security-policy-name tomsecuritypolicy \
+--domains /subscriptions/<subscriptionId>/resourcegroups/TimeOffManagement-RG-FD/providers/Microsoft.Cdn/profiles/tom-frontdoor-profile/afdEndpoints/tom-frontdoor-endpoint \
+--waf-policy /subscriptions/<subscriptionId>/resourcegroups/TimeOffManagement-RG-FD/providers/Microsoft.Network/frontdoorwebapplicationfirewallpolicies/tomfdfirewallpolicy
+```
+
+Second: Build and deploy the project in Azure DevOps
+1. Go to Pipelines.
+2. Go to New Pipeline.
+3. Select where your repository is (GitHub, Azure Repos, etc.)
+4. Select your repository.
+5. From there, you can select a Starter pipeline.
+6. Go to Variables -> New variable and in there set the following:
+    1. Name: azSubId
+    2. Value: <your subscription id>
+7. Click on Ok, and then in Save.
+8. Copy/paste the following YAML code: <YAML CODE>
+9. Once done, select Save and run.
+
+
 ### Self hosting
 
 Install TimeOff.Management application within your infrastructure:
