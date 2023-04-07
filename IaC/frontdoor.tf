@@ -64,7 +64,7 @@ resource "azurerm_cdn_frontdoor_origin" "tom_app_service_origin_bs" {
   certificate_name_check_enabled = true
 }
 
-resource "azurerm_cdn_frontdoor_route" "my_route" {
+resource "azurerm_cdn_frontdoor_route" "tom_front_door_route" {
   name                          = local.front_door_route_name
   cdn_frontdoor_endpoint_id     = azurerm_cdn_frontdoor_endpoint.tom_endpoint.id
   cdn_frontdoor_origin_group_id = azurerm_cdn_frontdoor_origin_group.tom_origin_group.id
@@ -98,7 +98,7 @@ resource "azurerm_cdn_frontdoor_firewall_policy" "tom_fd_firewallpolicy" {
     match_condition {
       match_variable     = "RemoteAddr"
       operator           = "IPMatch"
-      negation_condition = false
+      negation_condition = true
       match_values       = ["201.202.14.134"]
     }
   }
