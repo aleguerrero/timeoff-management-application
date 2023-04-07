@@ -78,7 +78,7 @@ Visit http://timeoff.management/
 
 Create company account and use cloud based version.
 
-### Using Terraform and Azure DevOps
+### Azure Hosted using Terraform and Azure DevOps
 
 This is the architecture diagram of the application hosting, it was done using Azure.
 ![image](https://user-images.githubusercontent.com/27838418/230555481-7b5c6ea3-ad6b-460d-9ca9-cf6ce283a2ae.png)
