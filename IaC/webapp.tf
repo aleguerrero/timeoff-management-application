@@ -17,20 +17,20 @@ resource "azurerm_linux_web_app" "tom_linux_web_app_eastus" {
   site_config {
     ftps_state          = "Disabled"
     minimum_tls_version = "1.2"
-    # ip_restriction {
-    #   service_tag               = "AzureFrontDoor.Backend"
-    #   ip_address                = null
-    #   virtual_network_subnet_id = null
-    #   action                    = "Allow"
-    #   priority                  = 100
-    #   headers = [{
-    #     x_azure_fdid      = [azurerm_cdn_frontdoor_profile.tom_front_door.resource_guid]
-    #     x_fd_health_probe = []
-    #     x_forwarded_for   = []
-    #     x_forwarded_host  = []
-    #   }]
-    #   name = "Allow traffic from Front Door"
-    # }
+    ip_restriction {
+      service_tag               = "AzureFrontDoor.Backend"
+      ip_address                = null
+      virtual_network_subnet_id = null
+      action                    = "Allow"
+      priority                  = 100
+      headers = [{
+        x_azure_fdid      = [azurerm_cdn_frontdoor_profile.tom_front_door.resource_guid]
+        x_fd_health_probe = []
+        x_forwarded_for   = []
+        x_forwarded_host  = []
+      }]
+      name = "Allow traffic from Front Door"
+    }
     application_stack {
       node_version = "14-lts"
     }
@@ -38,7 +38,7 @@ resource "azurerm_linux_web_app" "tom_linux_web_app_eastus" {
 
 }
 
-# North Central US
+# Brazil South
 resource "azurerm_service_plan" "tom_service_plan_bs" {
   name                = "TimeOffManagement-SP-bs"
   resource_group_name = azurerm_resource_group.tom_resource_group_bs.name
@@ -49,7 +49,7 @@ resource "azurerm_service_plan" "tom_service_plan_bs" {
 }
 
 resource "azurerm_linux_web_app" "tom_linux_web_app_bs" {
-  name                = "TimeOffManagement-LWA-westus"
+  name                = "TimeOffManagement-LWA-bs"
   resource_group_name = azurerm_resource_group.tom_resource_group_bs.name
   location            = azurerm_service_plan.tom_service_plan_bs.location
   service_plan_id     = azurerm_service_plan.tom_service_plan_bs.id
@@ -57,20 +57,20 @@ resource "azurerm_linux_web_app" "tom_linux_web_app_bs" {
   site_config {
     ftps_state          = "Disabled"
     minimum_tls_version = "1.2"
-    # ip_restriction {
-    #   service_tag               = "AzureFrontDoor.Backend"
-    #   ip_address                = null
-    #   virtual_network_subnet_id = null
-    #   action                    = "Allow"
-    #   priority                  = 100
-    #   headers = [{
-    #     x_azure_fdid      = [azurerm_cdn_frontdoor_profile.tom_front_door.resource_guid]
-    #     x_fd_health_probe = []
-    #     x_forwarded_for   = []
-    #     x_forwarded_host  = []
-    #   }]
-    #   name = "Allow traffic from Front Door"
-    # }
+    ip_restriction {
+      service_tag               = "AzureFrontDoor.Backend"
+      ip_address                = null
+      virtual_network_subnet_id = null
+      action                    = "Allow"
+      priority                  = 100
+      headers = [{
+        x_azure_fdid      = [azurerm_cdn_frontdoor_profile.tom_front_door.resource_guid]
+        x_fd_health_probe = []
+        x_forwarded_for   = []
+        x_forwarded_host  = []
+      }]
+      name = "Allow traffic from Front Door"
+    }
     application_stack {
       node_version = "14-lts"
     }

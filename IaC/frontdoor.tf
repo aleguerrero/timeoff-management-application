@@ -3,13 +3,13 @@ locals {
   front_door_endpoint_name      = "tom-frontdoor-endpoint"
   front_door_origin_group_name  = "tom-origin-group"
   front_door_origin_name_eastus = "tom-frontdoor-origin-eastus"
-  front_door_origin_name_bs   = "tom-frontdoor-origin-bs"
+  front_door_origin_name_bs     = "tom-frontdoor-origin-bs"
   front_door_route_name         = "tom-frontdoor-route"
 }
 
 resource "azurerm_cdn_frontdoor_profile" "tom_front_door" {
   name                = local.front_door_profile_name
-  resource_group_name = azurerm_resource_group.tom_resource_group_centalus.name
+  resource_group_name = azurerm_resource_group.tom_resource_group_centralus.name
   sku_name            = "Standard_AzureFrontDoor"
 }
 
@@ -75,4 +75,31 @@ resource "azurerm_cdn_frontdoor_route" "my_route" {
   forwarding_protocol    = "HttpsOnly"
   link_to_default_domain = true
   https_redirect_enabled = true
+}
+
+resource "azurerm_cdn_frontdoor_firewall_policy" "tom_fd_firewallpolicy" {
+  name                              = "tomfdfirewallpolicy"
+  resource_group_name               = azurerm_resource_group.tom_resource_group_centralus.name
+  enabled                           = true
+  mode                              = "Prevention"
+  custom_block_response_status_code = 403
+  custom_block_response_body        = "QWNjZXNzIGRlbmllZCE="
+  sku_name                          = azurerm_cdn_frontdoor_profile.tom_front_door.sku_name
+
+  custom_rule {
+    name                           = "AllowOnlyMyPC"
+    enabled                        = true
+    priority                       = 1
+    rate_limit_duration_in_minutes = 1
+    rate_limit_threshold           = 10
+    type                           = "MatchRule"
+    action                         = "Block"
+
+    match_condition {
+      match_variable     = "RemoteAddr"
+      operator           = "IPMatch"
+      negation_condition = false
+      match_values       = ["201.202.14.134"]
+    }
+  }
 }
