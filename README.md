@@ -78,6 +78,54 @@ Visit http://timeoff.management/
 
 Create company account and use cloud based version.
 
+### Azure Hosted using Terraform and Azure DevOps
+
+This is the architecture diagram of the application hosting, it was done using Azure.
+![image](https://user-images.githubusercontent.com/27838418/230555481-7b5c6ea3-ad6b-460d-9ca9-cf6ce283a2ae.png)
+
+Prerequisites:
+- Have an Azure account.
+- Have an Azure DevOps project and organization with Agent Pools configured.
+- Have Azure CLI in your machine.
+- Have Terraform locally installed and Azure configured, for more information on how to configure it, follow this [documentation](https://developer.hashicorp.com/terraform/tutorials/azure-get-started/azure-build#authenticate-using-the-azure-cli).
+
+Steps:
+First: Create the infrastructure.
+1. Inside the project, open a terminal.
+2. Go to the IaC folder by using ```cd IaC```.
+3. Enter ```terraform init```.
+4. Enter ```terraform plan```.
+5. Enter ```terraform apply -auto-approve```.
+6. Once done, run the following script to connect the policy to the Front Door service:
+```bash
+# Change the <subscriptionId> for your Azure Subscription ID
+az afd security-policy create \
+    --resource-group TimeOffManagement-RG-FD \
+    --profile-name tom-frontdoor-profile \
+    --security-policy-name tomsecuritypolicy \
+    --domains /subscriptions/<subscriptionId>/resourcegroups/TimeOffManagement-RG-FD/providers/Microsoft.Cdn/profiles/tom-frontdoor-profile/afdEndpoints/tom-frontdoor-endpoint \
+    --waf-policy /subscriptions/<subscriptionId>/resourcegroups/TimeOffManagement-RG-FD/providers/Microsoft.Network/frontdoorwebapplicationfirewallpolicies/tomfdfirewallpolicy
+```
+
+Second: Build and deploy the project in Azure DevOps
+1. Go to Pipelines.
+2. Go to New Pipeline.
+3. Select where your repository is (GitHub, Azure Repos, etc.)
+4. Select your repository.
+5. From there, you can select a Starter pipeline.
+6. Go to Variables -> New variable and in there set the following:
+    1. Name: azSubId
+    2. Value: your-subscription-id
+7. Click on Ok, and then in Save.
+8. Copy/paste the following YAML code: [azure-pipelines.yml](https://github.com/aleguerrero/timeoff-management-application/blob/2a8897d61963d8bfb3d71a1ac850b03751f1e042/azure-pipelines.yml)
+    NOTE: If you need to change the agent pool name, do it on each pool->name in the YAML 
+    ```yaml
+    pool: 
+        name: agentPoolName
+    ```
+10. Once done, select Save and run.
+
+
 ### Self hosting
 
 Install TimeOff.Management application within your infrastructure:
