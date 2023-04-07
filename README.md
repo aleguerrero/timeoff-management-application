@@ -121,7 +121,7 @@ Second: Build and deploy the project in Azure DevOps
     NOTE: If you need to change the agent pool name, do it on each pool->name in the YAML 
     ```yaml
     pool: 
-        name:
+        name: agentPoolName
     ```
 10. Once done, select Save and run.
 
