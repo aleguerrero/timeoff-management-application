@@ -2,7 +2,7 @@ trigger:
 - master
 
 variables:
-  azureSubscription: $(azureSubscriptionId)
+  azureSubscription: $(azSubId)
   webAppNameEastUS: 'TimeOffManagement-LWA-eastus'
   webAppNameBS: 'TimeOffManagement-LWA-bs'
   environmentName: 'TimeOffManagement-LWA'
